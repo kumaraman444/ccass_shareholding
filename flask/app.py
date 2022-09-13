@@ -1,3 +1,4 @@
+from distutils.log import error
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -15,20 +16,32 @@ def dictList(newlist):
     listShare = []
     listDate = []
     listDictionary = []
-    val = newlist[0]['participantID']
+    listInvestor = [newlist[0]['participantID']]
+    val = False
+    id = ''
+    inv = ''
     for dict in newlist:
+        if dict['participantID'] in listInvestor:
+            val = True
+        else:
+            val = False
         share = int(dict['Shareholding'].replace(',', ''))
-        if(not val == dict['participantID']):
-            val = dict['participantID']
-            dictionary = {'investorId': dict['participantID'],'investor':dict['investor'],'date':str(listDate), 'shareholding': str(listShare)}
+        id = dict['participantID']
+        inv = dict['investor']
+        if(not val):
+            listInvestor.append(dict['participantID'])
+            dictionary = {'investorId': id,'investor':inv,'date':str(listDate), 'shareholding': str(listShare)}
             listShare.clear()
             listDate.clear()
             listShare.append(share)
             listDate.append(dict['date'])
             listDictionary.append(dictionary)
-        elif val == dict['participantID']:
+        elif val:
             listShare.append(share)
             listDate.append(dict['date'])
+    dictionary = {'investorId': id,'investor':inv,'date':str(listDate), 'shareholding': str(listShare)}
+    listDictionary.append(dictionary)
+    
     return listDictionary
 
 def ProcessDataFrame(df):
@@ -83,9 +96,15 @@ def Main(code,name,today):
             'txtParticipantName': '',
             'txtSelPartID': ''
             }
-        r = req.post('https://www3.hkexnews.hk/sdw/search/searchsdw.aspx', data=data)
-        df = pd.read_html(r.content)[0]
-        return df
+        try :
+            r = req.post('https://www3.hkexnews.hk/sdw/search/searchsdw.aspx', data=data)
+            df = pd.read_html(r.content)[0]
+            return df
+        except:
+            return "Please check the date field"
+        # r = req.post('https://www3.hkexnews.hk/sdw/search/searchsdw.aspx', data=data)
+        # df = pd.read_html(r.content)[0]
+        # return df
 
 def recur_dictify(frame):
     if len(frame.columns) == 1:
@@ -115,9 +134,9 @@ def SecondApi(startDate,endDate,df,code,name):
         df_check['date'] = date_time
         val = GetDictionary(df_check,listInvestors) 
         stockListPlot = stockListPlot + val
-        newlist = sorted(stockListPlot, key=lambda d: d['participantID'])
-        val = dictList(newlist)
-    return val
+        # newlist = sorted(stockListPlot, key=lambda d: d['participantID'])
+        # #print(newlist)
+    return dictList(sorted(stockListPlot, key=lambda d: d['participantID']))
 
 def ThirdApiCall(startDate,endDate,df,code,name):
     dateRange = pd.date_range(start =startDate, 
@@ -180,7 +199,5 @@ def threshold():
 
     return json.dumps(finalList)
 
-
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="localhost", port=8000, debug=True)
