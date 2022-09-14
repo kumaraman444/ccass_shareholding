@@ -16,29 +16,22 @@ def dictList(newlist):
     listShare = []
     listDate = []
     listDictionary = []
-    listInvestor = [newlist[0]['participantID']]
-    val = False
-    id = ''
-    inv = ''
+    id = newlist[0]['participantID']
+    inv = newlist[0]['investor']
     for dict in newlist:
-        if dict['participantID'] in listInvestor:
-            val = True
-        else:
-            val = False
         share = int(dict['Shareholding'].replace(',', ''))
-        id = dict['participantID']
-        inv = dict['investor']
-        if(not val):
-            listInvestor.append(dict['participantID'])
+        if id == dict['participantID']:
+            listShare.append(share)
+            listDate.append(dict['date'])
+        else:
             dictionary = {'investorId': id,'investor':inv,'date':str(listDate), 'shareholding': str(listShare)}
+            id = dict['participantID']
+            inv = dict['investor']
             listShare.clear()
             listDate.clear()
             listShare.append(share)
             listDate.append(dict['date'])
             listDictionary.append(dictionary)
-        elif val:
-            listShare.append(share)
-            listDate.append(dict['date'])
     dictionary = {'investorId': id,'investor':inv,'date':str(listDate), 'shareholding': str(listShare)}
     listDictionary.append(dictionary)
     
