@@ -18,6 +18,6 @@
 Api calls available for this application 'http://35.172.114.212:8000/' - GET, 'http://35.172.114.212:8000/plot' - POST,
 'http://35.172.114.212:8000/thershold' = POST
 
-The backend for this application is real time - it is fetching data from 'https://www3.hkexnews.hk/sdw/search/searchsdw.aspx'
-The request is then processed using pandas dataframe and the result is passed in the form of dictionary to based on the request
-The back is not connected to any data base for storage, it acts as a connection between 'https://www3.hkexnews.hk/sdw/search/searchsdw.aspx' and 'http://d1v2o27sf89ntx.cloudfront.net/'.
+- The backend for this application is real time - it is fetching data from 'https://www3.hkexnews.hk/sdw/search/searchsdw.aspx'
+- The request is then processed using pandas dataframe and the result is passed in the form of dictionary to based on the request
+- The back is not connected to any data base for storage, it acts as a connection between 'https://www3.hkexnews.hk/sdw/search/searchsdw.aspx' and 'http://d1v2o27sf89ntx.cloudfront.net/'.
