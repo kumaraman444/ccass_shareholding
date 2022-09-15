@@ -1,0 +1,26 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Investor</th>
+      <th scope="col">Shareholding</th>
+      <th scope="col">Total Per Shareholding</th>
+      <th scope="col">Date</th>
+      <th scope="col">Change % Shareholding - previous day</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let list of thresList; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>
+        {{ list.investor }}
+      </td>
+      <td>{{ list.Shareholding }}</td>
+      <td>{{ list.tSharePercent }}</td>
+      <td>
+        {{ list.date }}
+      </td>
+      <td>{{ list.thresholdChange }}</td>
+    </tr>
+    </tbody>
+</table>

@@ -1,0 +1,10 @@
+<h3>PLOT</h3>
+<div *ngIf="plotList">
+    {{newClass(plotList)}}
+    <div>
+        <div echarts [options]="_charOption"></div>
+    </div>
+</div>
+<!-- <div *ngFor = "let plt of plotList">
+    <h1>{{plt.investor}}</h1>
+</div> -->
