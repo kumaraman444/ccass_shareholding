@@ -23,7 +23,7 @@
 
 
 Api calls available for this application 'http://35.172.114.212:8000/' - GET, 'http://35.172.114.212:8000/plot' - POST,
-'http://35.172.114.212:8000/thershold' = POST
+'http://35.172.114.212:8000/thershold' - POST
 
 
 #### About the "http://d1v2o27sf89ntx.cloudfront.net/", the app is realtime thus it has some latency. 
