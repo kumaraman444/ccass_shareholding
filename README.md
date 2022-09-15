@@ -1,14 +1,14 @@
 # CCASS Plot and Threshold Table App
 
-## The App is working in "http://d1v2o27sf89ntx.cloudfront.net/" please use incognito mode to access this page
+### The App is working in "http://d1v2o27sf89ntx.cloudfront.net/" please use incognito mode to access this page
 
-## The installation process:
+#### The installation process:
 - Install python3 for this application to run
 - Install pip3 for this application
 - Go to --> flask folder --> type python3 app.py
 
 
-### The pip packages used here:
+#### The pip packages used here:
 - BeautifulSoup4
 - pandas
 - requests
@@ -24,3 +24,7 @@
 
 Api calls available for this application 'http://35.172.114.212:8000/' - GET, 'http://35.172.114.212:8000/plot' - POST,
 'http://35.172.114.212:8000/thershold' = POST
+
+
+#### About the "http://d1v2o27sf89ntx.cloudfront.net/", the app is realtime thus it has some latency. 
+- The app at every call request data from 'https://www3.hkexnews.hk/sdw/search/searchsdw.aspx'
